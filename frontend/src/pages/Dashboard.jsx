@@ -55,7 +55,7 @@ const styles = {
     borderBottom: "2px solid rgba(16, 185, 129, 0.1)"
   },
   titulo: {
-    fontSize: "20px",
+    fontSize: "clamp(18px, 5vw, 24px)",
     fontWeight: "700",
     color: "#111827",
     margin: "0 0 8px 0",
@@ -69,31 +69,66 @@ const styles = {
   },
   mainContent: {
     display: "flex",
+    flexDirection: "row",
     gap: "16px",
     flex: 1,
     minHeight: 0,
-    "@media (max-width: 1024px)": {
-      flexDirection: "column"
-    }
   },
   graficoContainer: {
-    flex: "0 0 60%",
+    flex: "1",
     minHeight: 0,
-    "@media (max-width: 1024px)": {
-      flex: "1"
-    }
+    minWidth: 0,
   },
   cardsContainer: {
-    flex: "0 0 40%",
+    flex: "1",
     minHeight: 0,
-    "@media (max-width: 1024px)": {
-      flex: "1"
-    }
+    minWidth: 0,
   },
   alertasContainer: {
     flex: "0 0 auto",
     maxHeight: "30%",
-    overflow: "hidden"
+    overflow: "auto"
   }
-};  
+};
+
+// CSS Responsivo Global
+const responsiveStyles = `
+@media (max-width: 768px) {
+  [class*="mainContent"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  [class*="graficoContainer"],
+  [class*="cardsContainer"] {
+    flex: 1 !important;
+    min-height: 300px !important;
+  }
+
+  [class*="alertasContainer"] {
+    max-height: 40% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  [class*="container"] {
+    gap: 12px !important;
+  }
+
+  [class*="titulo"] {
+    font-size: 18px !important;
+  }
+
+  [class*="graficoContainer"],
+  [class*="cardsContainer"] {
+    min-height: 280px !important;
+  }
+}
+`;
+
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = responsiveStyles;
+  document.head.appendChild(style);
+}
 

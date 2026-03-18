@@ -128,18 +128,19 @@ const styles = {
     justifyContent: "center",
     alignItems: "flex-start",
     minHeight: "100%",
-    paddingTop: "50px",
-    paddingBottom: "50px",
+    paddingTop: "clamp(20px, 5vw, 50px)",
+    paddingBottom: "clamp(20px, 5vw, 50px)",
   },
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.98)",
-    padding: "50px",
+    padding: "clamp(25px, 8vw, 50px)",
     borderRadius: "24px",
     boxShadow: "0 20px 60px rgba(0, 0, 0, 0.08)",
     border: "1px solid rgba(0, 0, 0, 0.05)",
     width: "100%",
     maxWidth: "520px",
     backdropFilter: "blur(10px)",
+    margin: "0 auto",
   },
   header: {
     marginBottom: "35px",
@@ -147,7 +148,7 @@ const styles = {
     paddingBottom: "20px",
   },
   titulo: {
-    fontSize: "2rem",
+    fontSize: "clamp(1.5rem, 5vw, 2rem)",
     fontWeight: "800",
     background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     WebkitBackgroundClip: "text",
@@ -156,7 +157,7 @@ const styles = {
   },
   subtitulo: {
     color: "#6b7280",
-    fontSize: "0.95rem",
+    fontSize: "clamp(0.85rem, 2vw, 0.95rem)",
     marginTop: "8px",
   },
   form: {
@@ -171,6 +172,7 @@ const styles = {
   },
   row: {
     display: "flex",
+    flexDirection: "row",
     gap: "20px",
   },
   label: {
@@ -216,3 +218,28 @@ const styles = {
     border: "1px solid #FECACA",
   },
 };
+
+// CSS Responsivo
+const responsiveAddStyles = `
+@media (max-width: 768px) {
+  [class*="row"] {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  [class*="card"] {
+    margin: 0 auto !important;
+    width: 100% !important;
+  }
+
+  [class*="botao"] {
+    width: 100% !important;
+  }
+}
+`;
+
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = responsiveAddStyles;
+  document.head.appendChild(style);
+}

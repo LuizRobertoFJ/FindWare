@@ -1,11 +1,20 @@
 import { Link, useLocation } from "react-router-dom";    
-import { useAuth } from "../context/AuthContext";   
 
-export default function MenuLateral() {
-    const location = useLocation(); // Hook para identificar a rota atual
+export default function MenuLateral({ menuAberto, setMenuAberto }) {
+    const location = useLocation();
+
+    const handleLinkClick = () => {
+        // Fechar menu ao clicar em um link (mobile)
+        if (window.innerWidth <= 768) {
+            setMenuAberto(false);
+        }
+    };
 
     return (
-        <div style={styles.sidebar}>
+        <div style={{
+            ...styles.sidebar,
+            ...(menuAberto ? styles.sidebarAberto : styles.sidebarFechado)
+        }}>
             <div style={styles.logoArea}>
                 <h1 style={styles.logoText}>
                     Find<span style={styles.logoSpan}>Ware</span>
@@ -15,36 +24,51 @@ export default function MenuLateral() {
             <nav style={styles.nav}>
                 <ul style={styles.ul}>
                     <li style={styles.li}>
-                        <Link to="/dashboard" style={{
-                            ...styles.link,
-                            ...(location.pathname === "/dashboard" ? styles.activeLink : {})
-                        }}>
-                            <span style={styles.icon}></span> Home
+                        <Link 
+                            to="/dashboard" 
+                            onClick={handleLinkClick}
+                            style={{
+                                ...styles.link,
+                                ...(location.pathname === "/dashboard" ? styles.activeLink : {})
+                            }}
+                        >
+                            <span style={styles.icon}>🏠</span> Home
                         </Link>
                     </li>
                     <li style={styles.li}>
-                        <Link to="/addproduto" style={{
-                            ...styles.link,
-                            ...(location.pathname === "/addproduto" ? styles.activeLink : {})
-                        }}>
-                            <span style={styles.icon}></span> Novo Produto
+                        <Link 
+                            to="/addproduto"
+                            onClick={handleLinkClick}
+                            style={{
+                                ...styles.link,
+                                ...(location.pathname === "/addproduto" ? styles.activeLink : {})
+                            }}
+                        >
+                            <span style={styles.icon}>➕</span> Novo Produto
                         </Link>
                     </li>
                     <li style={styles.li}>
-                        <Link to="/listaprodutos" style={{
-                            ...styles.link,
-                            ...(location.pathname === "/listaprodutos" ? styles.activeLink : {})
-                        }}>
-                            <span style={styles.icon}></span> Estoque
+                        <Link 
+                            to="/listaprodutos"
+                            onClick={handleLinkClick}
+                            style={{
+                                ...styles.link,
+                                ...(location.pathname === "/listaprodutos" ? styles.activeLink : {})
+                            }}
+                        >
+                            <span style={styles.icon}>📦</span> Estoque
                         </Link>
                     </li>
                     
-                    {/* Espaçador para empurrar o sair para o final */}
                     <div style={{ flex: 1 }}></div>
 
                     <li style={styles.li}>
-                        <Link to="/sair" style={styles.logoutLink}>
-                            <span style={styles.icon}></span> Sair
+                        <Link 
+                            to="/sair"
+                            onClick={handleLinkClick}
+                            style={styles.logoutLink}
+                        >
+                            <span style={styles.icon}>🚪</span> Sair
                         </Link>
                     </li>
                 </ul>
@@ -52,6 +76,116 @@ export default function MenuLateral() {
         </div>
     );
 }
+
+const styles = {
+    sidebar: {
+        width: "280px",
+        height: "100vh",
+        background: "linear-gradient(180deg, #f6f6f7 0%, #cfcdcd 100%)",
+        color: "#000000",
+        display: "flex",
+        flexDirection: "column",
+        position: "fixed",
+        left: 0,
+        top: 0,
+        zIndex: 1000,
+        boxShadow: "4px 0 20px rgba(0,0,0,0.15)",
+        borderRight: "1px solid rgba(255,255,255,0.1)",
+        fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        transition: "transform 0.3s ease",
+    },
+    sidebarAberto: {
+        transform: "translateX(0)",
+    },
+    sidebarFechado: {
+        "@media (max-width: 768px)": {
+            transform: "translateX(-100%)",
+        }
+    },
+    logoArea: {
+        padding: "40px 20px",
+        textAlign: "center",
+        borderBottom: "2px solid rgba(0,0,0,0.1)",
+    },
+    logoText: {
+        fontSize: "28px",
+        fontWeight: "900",
+        margin: 0,
+        background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        letterSpacing: "-1px",
+    },
+    logoSpan: {
+        background: "linear-gradient(135deg, #34d399 0%, #10b981 100%)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+    },
+    nav: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+    },
+    ul: {
+        listStyle: "none",
+        padding: "0 15px",
+        margin: 0,
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+    },
+    li: {
+        margin: 0,
+    },
+    link: {
+        display: "flex",
+        alignItems: "center",
+        padding: "12px 15px",
+        color: "#000000",
+        textDecoration: "none",
+        borderRadius: "8px",
+        fontSize: "16px",
+        fontWeight: "500",
+        transition: "all 0.3s ease",
+        cursor: "pointer",
+    },
+    activeLink: {
+        background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+        color: "white",
+        boxShadow: "0 4px 10px rgba(16, 185, 129, 0.3)",
+    },
+    logoutLink: {
+        display: "flex",
+        alignItems: "center",
+        padding: "12px 15px",
+        color: "#ef4444",
+        textDecoration: "none",
+        borderRadius: "8px",
+        fontSize: "16px",
+        fontWeight: "500",
+        transition: "all 0.3s ease",
+        cursor: "pointer",
+    },
+    icon: {
+        marginRight: "12px",
+        fontSize: "18px",
+    },
+};
+
+// CSS responsivo
+const responsiveCSS = `
+@media (max-width: 768px) {
+    [class*="sidebar"] {
+        width: 100% !important;
+        transform: translateX(-100%) !important;
+    }
+}
+`;
+
+if (typeof document !== "undefined") {
+    const style = document.createElement("style");
+    style.textContent = responsiveCSS;
+    document.head.appendChild(style);
 
 const styles = {
     sidebar: {

@@ -287,13 +287,13 @@ const styles = {
         marginBottom: "30px",
     },
     titulo: {
-        fontSize: "24px",
+        fontSize: "clamp(20px, 5vw, 28px)",
         color: "#111827",
         margin: 0,
     },
     subtitulo: {
         color: "#6B7280",
-        fontSize: "14px",
+        fontSize: "clamp(12px, 2vw, 14px)",
     },
     grid: {
         display: "grid",
@@ -316,7 +316,7 @@ const styles = {
     },
     nomeProduto: {
         margin: "0 0 8px 0",
-        fontSize: "18px",
+        fontSize: "clamp(16px, 4vw, 18px)",
         color: "#1F2937",
     },
     badgePreco: {
@@ -386,7 +386,7 @@ const styles = {
     },
     modal: {
         backgroundColor: 'white',
-        padding: '30px',
+        padding: 'clamp(20px, 6vw, 30px)',
         borderRadius: '16px',
         width: '100%',
         maxWidth: '480px',
@@ -395,7 +395,8 @@ const styles = {
         gap: '15px',
         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
         maxHeight: '90vh',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        margin: '0 20px'
     },
     modalTitle: {
         margin: "0 0 10px 0",
@@ -528,3 +529,51 @@ const styles = {
     },
 
 };
+
+// CSS Responsivo Global
+const responsiveListaStyles = `
+@media (max-width: 768px) {
+  [class*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  [class*="cardActions"] {
+    flex-direction: column !important;
+  }
+
+  [class*="btnEdit"],
+  [class*="btnDel"] {
+    width: 100% !important;
+  }
+
+  [class*="modal"] {
+    width: calc(100% - 40px) !important;
+    margin: 20px !important;
+  }
+
+  [class*="modalTitle"] {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  [class*="grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+
+  [class*="card"] {
+    padding: 16px !important;
+  }
+
+  [class*="nomeProduto"] {
+    font-size: 16px !important;
+  }
+}
+`;
+
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = responsiveListaStyles;
+  document.head.appendChild(style);
+}
