@@ -4,12 +4,12 @@ import { Menu, X } from "lucide-react";
 
 export default function Layout({ children }) {
   const [menuAberto, setMenuAberto] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   // Detectar mudança de tamanho de tela
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 768;
+      const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
       if (!mobile) {
         setMenuAberto(false); // Fechar menu ao voltar para desktop
@@ -38,10 +38,26 @@ export default function Layout({ children }) {
         </button>
       )}
 
-      {/* Menu Lateral - Sempre renderizado, visibilidade controlada por CSS responsivo */}
+      {/* Menu Lateral - Sempre renderizado */}
       <div style={{
         ...styles.menuWrapper,
-        ...(isMobile && !menuAberto ? { transform: "translateX(-100%)" } : {})
+        ...(isMobile ? {
+          position: "fixed",
+          left: 0,
+          top: 0,
+          height: "100vh",
+          width: "75vw",
+          maxWidth: "320px",
+          zIndex: menuAberto ? 1000 : -1,
+          transform: menuAberto ? "translateX(0)" : "translateX(-100%)",
+        } : {
+          position: "relative",
+          width: "280px",
+          height: "auto",
+          zIndex: "auto",
+          transform: "translateX(0)",
+          pointerEvents: "auto",
+        })
       }}>
         <MenuLateral menuAberto={menuAberto} setMenuAberto={setMenuAberto} />
       </div>

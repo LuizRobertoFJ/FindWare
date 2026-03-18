@@ -4,8 +4,8 @@ export default function MenuLateral({ menuAberto, setMenuAberto }) {
     const location = useLocation();
 
     const handleLinkClick = () => {
-        // Fechar menu ao clicar em um link (mobile)
-        if (window.innerWidth <= 768) {
+        // Fechar menu ao clicar em um link (mobile/tablet - <1024px)
+        if (window.innerWidth < 1024) {
             setMenuAberto(false);
         }
     };
@@ -85,9 +85,7 @@ const styles = {
         color: "#000000",
         display: "flex",
         flexDirection: "column",
-        position: "fixed",
-        left: 0,
-        top: 0,
+        position: "relative",
         zIndex: 1000,
         boxShadow: "4px 0 20px rgba(0,0,0,0.15)",
         borderRight: "1px solid rgba(255,255,255,0.1)",
@@ -95,10 +93,10 @@ const styles = {
         transition: "transform 0.3s ease",
     },
     sidebarAberto: {
-        transform: "translateX(0)",
+        // Controlado pelo menuWrapper em mobile
     },
     sidebarFechado: {
-        transform: "translateX(-100%)",
+        // Controlado pelo menuWrapper em mobile
     },
     logoArea: {
         padding: "40px 20px",
@@ -165,18 +163,3 @@ const styles = {
         cursor: "pointer",
     },
 };
-
-// CSS responsivo para mobile
-if (typeof document !== "undefined") {
-    const responsiveCSS = `
-    @media (max-width: 768px) {
-        [style*="width: 280px"] {
-            width: 75vw !important;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.2) !important;
-        }
-    }
-    `;
-    const style = document.createElement("style");
-    style.textContent = responsiveCSS;
-    document.head.appendChild(style);
-}
