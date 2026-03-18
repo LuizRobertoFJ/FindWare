@@ -9,9 +9,10 @@ export default function Layout({ children }) {
   // Detectar mudança de tamanho de tela
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
-        setMenuAberto(false);
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setMenuAberto(false); // Fechar menu ao voltar para desktop
       }
     };
 
@@ -22,18 +23,14 @@ export default function Layout({ children }) {
   return (
     <div style={{
       display: "flex",
-      width: "100vw",
-      height: "100vh",
+      width: "100%",
+      minHeight: "100vh",
       position: "relative",
-      overflow: "hidden"
     }}>
       {/* Menu Hambúrguer - Apenas Mobile */}
       {isMobile && (
         <button
-          style={{
-            ...styles.botaoMenu,
-            display: "block"
-          }}
+          style={styles.botaoMenu}
           onClick={() => setMenuAberto(!menuAberto)}
           aria-label="Abrir menu"
         >
@@ -41,8 +38,13 @@ export default function Layout({ children }) {
         </button>
       )}
 
-      {/* Menu Lateral */}
-      <MenuLateral menuAberto={menuAberto} setMenuAberto={setMenuAberto} />
+      {/* Menu Lateral - Sempre renderizado, visibilidade controlada por CSS responsivo */}
+      <div style={{
+        ...styles.menuWrapper,
+        ...(isMobile && !menuAberto ? { transform: "translateX(-100%)" } : {})
+      }}>
+        <MenuLateral menuAberto={menuAberto} setMenuAberto={setMenuAberto} />
+      </div>
 
       {/* Overlay quando menu aberto (mobile) */}
       {isMobile && menuAberto && (
@@ -54,12 +56,9 @@ export default function Layout({ children }) {
 
       {/* Conteúdo Principal */}
       <main style={{
+        ...styles.mainContent,
         marginLeft: isMobile ? 0 : "280px",
-        flex: 1,
-        padding: isMobile ? "60px 15px 15px 15px" : "20px 25px",
-        overflow: "auto",
-        fontFamily: "'Segoe UI', Roboto, sans-serif",
-        transition: "all 0.3s ease",
+        paddingTop: isMobile ? "60px" : "0px",
       }}>
         {children}
       </main>
@@ -82,6 +81,9 @@ const styles = {
     fontSize: "20px",
     transition: "all 0.3s ease",
   },
+  menuWrapper: {
+    transition: "transform 0.3s ease",
+  },
   overlay: {
     position: "fixed",
     top: 0,
@@ -91,4 +93,11 @@ const styles = {
     background: "rgba(0,0,0,0.5)",
     zIndex: 999,
   },
+  mainContent: {
+    flex: 1,
+    padding: "20px 25px",
+    overflow: "auto",
+    fontFamily: "'Segoe UI', Roboto, sans-serif",
+    transition: "all 0.3s ease",
+  }
 };

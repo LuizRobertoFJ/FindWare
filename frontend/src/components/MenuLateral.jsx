@@ -32,7 +32,7 @@ export default function MenuLateral({ menuAberto, setMenuAberto }) {
                                 ...(location.pathname === "/dashboard" ? styles.activeLink : {})
                             }}
                         >
-                            <span style={styles.icon}>🏠</span> Home
+                            Home
                         </Link>
                     </li>
                     <li style={styles.li}>
@@ -44,7 +44,7 @@ export default function MenuLateral({ menuAberto, setMenuAberto }) {
                                 ...(location.pathname === "/addproduto" ? styles.activeLink : {})
                             }}
                         >
-                            <span style={styles.icon}>➕</span> Novo Produto
+                            Novo Produto
                         </Link>
                     </li>
                     <li style={styles.li}>
@@ -56,7 +56,7 @@ export default function MenuLateral({ menuAberto, setMenuAberto }) {
                                 ...(location.pathname === "/listaprodutos" ? styles.activeLink : {})
                             }}
                         >
-                            <span style={styles.icon}>📦</span> Estoque
+                            Estoque
                         </Link>
                     </li>
                     
@@ -68,7 +68,7 @@ export default function MenuLateral({ menuAberto, setMenuAberto }) {
                             onClick={handleLinkClick}
                             style={styles.logoutLink}
                         >
-                            <span style={styles.icon}>🚪</span> Sair
+                            Sair
                         </Link>
                     </li>
                 </ul>
@@ -163,10 +163,6 @@ const styles = {
         fontWeight: "500",
         transition: "all 0.3s ease",
         cursor: "pointer",
-    },
-    icon: {
-        marginRight: "12px",
-        fontSize: "18px",
     },
 };
 

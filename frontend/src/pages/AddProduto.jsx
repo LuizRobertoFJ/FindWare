@@ -55,12 +55,13 @@ export default function AddProduto() {
 
   return (
     <div style={styles.container}>
-      <div style={styles.card}>
-        <div style={styles.header}>
-          <h2 style={styles.titulo}>Novo Produto</h2>
-          <p style={styles.subtitulo}>Preencha os dados abaixo para atualizar seu estoque</p>
-        </div>
+      <header style={styles.header}>
+        <h1 style={styles.titulo}>Novo Produto</h1>
+        <p style={styles.subtitulo}>Preencha os dados para adicionar ao inventário</p>
+        <div style={styles.linhaDecorativa}></div>
+      </header>
 
+      <div style={styles.card}>
         <form onSubmit={handleAdd} style={styles.form}>
           <div style={styles.inputGroup}>
             <label style={styles.label}>Nome do Produto</label>
@@ -125,55 +126,57 @@ export default function AddProduto() {
 const styles = {
   container: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    minHeight: "100%",
-    paddingTop: "clamp(20px, 5vw, 50px)",
-    paddingBottom: "clamp(20px, 5vw, 50px)",
-  },
-  card: {
-    backgroundColor: "rgba(255, 255, 255, 0.98)",
-    padding: "clamp(25px, 8vw, 50px)",
-    borderRadius: "24px",
-    boxShadow: "0 20px 60px rgba(0, 0, 0, 0.08)",
-    border: "1px solid rgba(0, 0, 0, 0.05)",
+    flexDirection: "column",
+    height: "100%",
     width: "100%",
-    maxWidth: "520px",
-    backdropFilter: "blur(10px)",
-    margin: "0 auto",
+    gap: "16px",
   },
   header: {
-    marginBottom: "35px",
+    paddingBottom: "12px",
     borderBottom: "2px solid rgba(16, 185, 129, 0.1)",
-    paddingBottom: "20px",
   },
   titulo: {
-    fontSize: "clamp(1.5rem, 5vw, 2rem)",
-    fontWeight: "800",
-    background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    margin: 0,
+    fontSize: "clamp(18px, 5vw, 24px)",
+    fontWeight: "700",
+    color: "#111827",
+    margin: "0 0 8px 0",
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
   },
   subtitulo: {
     color: "#6b7280",
     fontSize: "clamp(0.85rem, 2vw, 0.95rem)",
-    marginTop: "8px",
+    margin: "0 0 8px 0",
+  },
+  linhaDecorativa: {
+    width: "30px",
+    height: "2px",
+    backgroundColor: "#10b981",
+  },
+  card: {
+    backgroundColor: "rgba(255, 255, 255, 0.98)",
+    padding: "clamp(25px, 8vw, 40px)",
+    borderRadius: "16px",
+    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+    border: "1px solid rgba(0, 0, 0, 0.05)",
+    width: "100%",
+    maxWidth: "600px",
+    backdropFilter: "blur(10px)",
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: "24px",
+    gap: "20px",
   },
   inputGroup: {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
+    gap: "8px",
   },
   row: {
     display: "flex",
     flexDirection: "row",
-    gap: "20px",
+    gap: "16px",
   },
   label: {
     fontSize: "0.9rem",
@@ -182,10 +185,10 @@ const styles = {
     marginLeft: "2px",
   },
   input: {
-    padding: "14px 16px",
-    borderRadius: "12px",
-    border: "2px solid #E5E7EB",
-    fontSize: "1rem",
+    padding: "12px 14px",
+    borderRadius: "10px",
+    border: "1.5px solid #E5E7EB",
+    fontSize: "0.95rem",
     outline: "none",
     backgroundColor: "#F9FAFB",
     transition: "all 0.3s ease",
@@ -193,15 +196,15 @@ const styles = {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.02)",
   },
   botao: {
-    padding: "16px",
+    padding: "14px 20px",
     background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     color: "white",
     border: "none",
-    borderRadius: "12px",
+    borderRadius: "10px",
     fontWeight: "700",
-    fontSize: "1.05rem",
+    fontSize: "0.95rem",
     cursor: "pointer",
-    marginTop: "10px",
+    marginTop: "8px",
     transition: "all 0.3s ease",
     boxShadow: "0 8px 20px rgba(16, 185, 129, 0.3)",
     textTransform: "uppercase",
@@ -210,30 +213,36 @@ const styles = {
   erro: {
     color: "#DC2626",
     backgroundColor: "#FEE2E2",
-    padding: "14px 16px",
+    padding: "12px 14px",
     borderRadius: "10px",
     textAlign: "center",
-    fontSize: "0.9rem",
+    fontSize: "0.85rem",
     fontWeight: "600",
     border: "1px solid #FECACA",
+    margin: "0",
   },
 };
 
 // CSS Responsivo
 const responsiveAddStyles = `
 @media (max-width: 768px) {
-  [class*="row"] {
+  [style*="gap: 16px"] {
+    gap: 12px !important;
+  }
+
+  [style*="padding: clamp"] {
+    padding: 20px !important;
+  }
+
+  [style*="gap: 20px"] {
     flex-direction: column !important;
-    gap: 16px !important;
+    gap: 0 !important;
   }
+}
 
-  [class*="card"] {
-    margin: 0 auto !important;
-    width: 100% !important;
-  }
-
-  [class*="botao"] {
-    width: 100% !important;
+@media (max-width: 480px) {
+  [style*="fontSize: 0.95rem"] {
+    font-size: 0.85rem !important;
   }
 }
 `;
