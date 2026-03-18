@@ -98,9 +98,7 @@ const styles = {
         transform: "translateX(0)",
     },
     sidebarFechado: {
-        "@media (max-width: 768px)": {
-            transform: "translateX(-100%)",
-        }
+        transform: "translateX(-100%)",
     },
     logoArea: {
         padding: "40px 20px",
@@ -172,106 +170,17 @@ const styles = {
     },
 };
 
-// CSS responsivo
-const responsiveCSS = `
-@media (max-width: 768px) {
-    [class*="sidebar"] {
-        width: 100% !important;
-        transform: translateX(-100%) !important;
-    }
-}
-`;
-
+// CSS responsivo para mobile
 if (typeof document !== "undefined") {
+    const responsiveCSS = `
+    @media (max-width: 768px) {
+        [style*="width: 280px"] {
+            width: 75vw !important;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.2) !important;
+        }
+    }
+    `;
     const style = document.createElement("style");
     style.textContent = responsiveCSS;
     document.head.appendChild(style);
-
-const styles = {
-    sidebar: {
-        width: "280px",
-        height: "100vh",
-        background: "linear-gradient(180deg, #f6f6f7 0%, #cfcdcd 100%)",
-        color: "#000000",
-        display: "flex",
-        flexDirection: "column",
-        position: "fixed",
-        left: 0,
-        top: 0,
-        zIndex: 1000,
-        boxShadow: "4px 0 20px rgba(0,0,0,0.15)",
-        borderRight: "1px solid rgba(255,255,255,0.1)",
-        fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    },
-    logoArea: {
-        padding: "40px 20px",
-        textAlign: "center",
-    },
-    logoText: {
-        fontSize: "28px",
-        fontWeight: "900",
-        margin: 0,
-        background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        letterSpacing: "-1px",
-    },
-    logoSpan: {
-        background: "linear-gradient(135deg, #34d399 0%, #10b981 100%)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-    },
-    nav: {
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-    },
-    ul: {
-        listStyle: "none",
-        padding: "0 15px",
-        margin: 0,
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-    },
-    li: {
-        width: "100%",
-        marginBottom: "8px",
-    },
-    link: {
-        display: "flex",
-        alignItems: "center",
-        padding: "12px 20px",
-        color: "#000000",
-        textDecoration: "none",
-        fontSize: "15px",
-        fontWeight: "500",
-        borderRadius: "12px",
-        transition: "all 0.3s ease",
-        position: "relative",
-    },
-    activeLink: {
-        background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-        color: "#ffffff",
-        fontWeight: "700",
-        boxShadow: "0 4px 15px rgba(16, 185, 129, 0.3)",
-    },
-    icon: {
-        marginRight: "12px",
-        fontSize: "18px",
-    },
-    logoutLink: {
-        display: "flex",
-        alignItems: "center",
-        padding: "15px 20px",
-        color: "#ffffff",
-        textDecoration: "none",
-        fontSize: "15px",
-        fontWeight: "700",
-        borderTop: "1px solid rgba(255,255,255,0.1)",
-        marginBottom: "20px",
-        background: "rgba(252, 68, 68, 0.87)",
-        borderRadius: "12px",
-        transition: "all 0.3s ease",
-    }
-};
+}

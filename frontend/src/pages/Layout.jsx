@@ -1,26 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MenuLateral from "../components/MenuLateral";
 import { Menu, X } from "lucide-react";
 
 export default function Layout({ children }) {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Detectar mudança de tamanho de tela
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setMenuAberto(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div style={{ display: "flex", width: "100%", height: "100vh", position: "relative" }}>
+    <div style={{
+      display: "flex",
+      width: "100vw",
+      height: "100vh",
+      position: "relative",
+      overflow: "hidden"
+    }}>
       {/* Menu Hambúrguer - Apenas Mobile */}
-      <button
-        style={styles.botaoMenu}
-        onClick={() => setMenuAberto(!menuAberto)}
-        aria-label="Abrir menu"
-      >
-        {menuAberto ? <X size={24} /> : <Menu size={24} />}
-      </button>
+      {isMobile && (
+        <button
+          style={{
+            ...styles.botaoMenu,
+            display: "block"
+          }}
+          onClick={() => setMenuAberto(!menuAberto)}
+          aria-label="Abrir menu"
+        >
+          {menuAberto ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      )}
 
       {/* Menu Lateral */}
       <MenuLateral menuAberto={menuAberto} setMenuAberto={setMenuAberto} />
 
       {/* Overlay quando menu aberto (mobile) */}
-      {menuAberto && (
+      {isMobile && menuAberto && (
         <div 
           style={styles.overlay}
           onClick={() => setMenuAberto(false)}
@@ -29,17 +54,13 @@ export default function Layout({ children }) {
 
       {/* Conteúdo Principal */}
       <main style={{
-        marginLeft: menuAberto ? 0 : "280px",
+        marginLeft: isMobile ? 0 : "280px",
         flex: 1,
-        padding: "20px 25px",
+        padding: isMobile ? "60px 15px 15px 15px" : "20px 25px",
         overflow: "auto",
         fontFamily: "'Segoe UI', Roboto, sans-serif",
-        transition: "margin-left 0.3s ease",
-        "@media (max-width: 768px)": {
-          marginLeft: 0,
-          padding: "15px",
-        }
-      }} className="responsive-main">
+        transition: "all 0.3s ease",
+      }}>
         {children}
       </main>
     </div>
@@ -48,7 +69,6 @@ export default function Layout({ children }) {
 
 const styles = {
   botaoMenu: {
-    display: "none",
     position: "fixed",
     top: "15px",
     left: "15px",
@@ -72,24 +92,3 @@ const styles = {
     zIndex: 999,
   },
 };
-
-// Adicionar media query via CSS global
-const mediaQueryStyle = `
-@media (max-width: 768px) {
-  [style*="botaoMenu"] {
-    display: block !important;
-  }
-  
-  .responsive-main {
-    margin-left: 0 !important;
-    padding: 60px 15px 15px !important;
-  }
-}
-`;
-
-// Injetar styles globais
-if (typeof document !== "undefined") {
-  const style = document.createElement("style");
-  style.textContent = mediaQueryStyle;
-  document.head.appendChild(style);
-}
