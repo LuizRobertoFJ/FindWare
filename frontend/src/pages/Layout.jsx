@@ -51,12 +51,13 @@ export default function Layout({ children }) {
           zIndex: menuAberto ? 1000 : -1,
           transform: menuAberto ? "translateX(0)" : "translateX(-100%)",
         } : {
-          position: "relative",
+          position: "fixed",
+          left: 0,
+          top: 0,
           width: "280px",
-          height: "auto",
-          zIndex: "auto",
-          transform: "translateX(0)",
-          pointerEvents: "auto",
+          height: "100vh",
+          zIndex: 999,
+          overflow: "hidden",
         })
       }}>
         <MenuLateral menuAberto={menuAberto} setMenuAberto={setMenuAberto} />
@@ -76,7 +77,9 @@ export default function Layout({ children }) {
         marginLeft: isMobile ? 0 : "280px",
         paddingTop: isMobile ? "60px" : "0px",
       }}>
-        {children}
+        <div style={styles.mainWrapper}>
+          {children}
+        </div>
       </main>
     </div>
   );
@@ -111,9 +114,15 @@ const styles = {
   },
   mainContent: {
     flex: 1,
-    padding: "20px 25px",
-    overflow: "auto",
+    padding: "0px",
+    overflow: "hidden",
     fontFamily: "'Segoe UI', Roboto, sans-serif",
     transition: "all 0.3s ease",
+    backgroundColor: "#f9fafb",
+  },
+  mainWrapper: {
+    width: "100%",
+    padding: "16px 16px 12px 16px",
+    boxSizing: "border-box",
   }
 };

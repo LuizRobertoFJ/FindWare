@@ -284,26 +284,29 @@ const styles = {
     container: {
     },
     header: {
-        marginBottom: "30px",
+        marginBottom: "16px",
     },
     titulo: {
-        fontSize: "clamp(20px, 5vw, 28px)",
+        fontSize: "clamp(18px, 5vw, 24px)",
         color: "#111827",
         margin: 0,
+        fontWeight: "800",
+         textTransform: "uppercase",
     },
     subtitulo: {
         color: "#6B7280",
-        fontSize: "clamp(12px, 2vw, 14px)",
+        fontSize: "clamp(12px, 2vw, 13px)",
+        fontWeight: "600",
     },
     grid: {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        gap: "20px",
+        gap: "14px",
     },
     card: { 
         backgroundColor: "#ffffff",
         borderRadius: "16px",
-        padding: "24px",
+        padding: "16px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -316,8 +319,9 @@ const styles = {
     },
     nomeProduto: {
         margin: "0 0 8px 0",
-        fontSize: "clamp(16px, 4vw, 18px)",
+        fontSize: "clamp(14px, 3vw, 16px)",
         color: "#1F2937",
+        fontWeight: "700",
     },
     badgePreco: {
         display: "inline-block",
@@ -332,10 +336,11 @@ const styles = {
         border: "1px solid rgba(16, 185, 129, 0.2)",
     },
     descricao: {
-        fontSize: "14px",
+        fontSize: "13px",
         color: "#6B7280",
         lineHeight: "1.5",
-        marginBottom: "15px",
+        marginBottom: "12px",
+        fontWeight: "500",
     },
     estoqueInfo: {
         fontSize: "13px",
@@ -386,13 +391,13 @@ const styles = {
     },
     modal: {
         backgroundColor: 'white',
-        padding: 'clamp(20px, 6vw, 30px)',
+        padding: 'clamp(16px, 4vw, 20px)',
         borderRadius: '16px',
         width: '100%',
         maxWidth: '480px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '15px',
+        gap: '12px',
         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
         maxHeight: '90vh',
         overflowY: 'auto',
@@ -400,8 +405,9 @@ const styles = {
     },
     modalTitle: {
         margin: "0 0 10px 0",
-        fontSize: "20px",
-        color: "#111827"
+        fontSize: "18px",
+        color: "#111827",
+        fontWeight: "800",
     },
     inputGroup: {
         display: "flex",

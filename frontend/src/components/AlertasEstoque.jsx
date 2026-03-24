@@ -137,10 +137,12 @@ const styles = {
     display: "none"
   },
   titulo: {
-    fontSize: "15px",
+    fontSize: "14px",
     fontWeight: "700",
     color: "#111827",
     margin: 0,
+    textTransform: "uppercase",
+    letterSpacing: "0.3px",
   },
   badge: {
     display: "inline-block",
@@ -260,10 +262,10 @@ const styles = {
     marginBottom: "16px",
   },
   emptyTitle: {
-    fontSize: "18px",
+    fontSize: "16px",
     fontWeight: "700",
     color: "#111827",
-    margin: "0 0 8px 0",
+    margin: "0 0 6px 0",
   },
   emptyText: {
     fontSize: "14px",

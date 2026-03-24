@@ -67,7 +67,7 @@ export default function AddProduto() {
             <label style={styles.label}>Nome do Produto</label>
             <input
               type="text"
-              placeholder="Ex: Batom Rare Beauty"
+              placeholder="Produto"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
               style={styles.input}
@@ -79,7 +79,7 @@ export default function AddProduto() {
             <label style={styles.label}>Descrição Curta</label>
             <input
               type="text"
-              placeholder="Ex: Cor Mascavo - Longa duração"
+              placeholder="Detalhes"
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
               style={styles.input}
@@ -91,7 +91,7 @@ export default function AddProduto() {
               <label style={styles.label}>Preço (R$)</label>
               <input
                 type="number"
-                placeholder="0,00"
+                placeholder="Preço"
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
                 style={styles.input}
@@ -103,7 +103,7 @@ export default function AddProduto() {
               <label style={styles.label}>Qtd.</label>
               <input
                 type="number"
-                placeholder="0"
+                placeholder="Quantidade"
                 value={quantidade}
                 onChange={(e) => setQuantidade(e.target.value)}
                 style={styles.input}
@@ -127,7 +127,6 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    height: "100%",
     width: "100%",
     gap: "16px",
   },
@@ -136,8 +135,8 @@ const styles = {
     borderBottom: "2px solid rgba(16, 185, 129, 0.1)",
   },
   titulo: {
-    fontSize: "clamp(18px, 5vw, 24px)",
-    fontWeight: "700",
+    fontSize: "clamp(16px, 5vw, 24px)",
+    fontWeight: "800",
     color: "#111827",
     margin: "0 0 8px 0",
     textTransform: "uppercase",
@@ -155,18 +154,17 @@ const styles = {
   },
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.98)",
-    padding: "clamp(25px, 8vw, 40px)",
+    padding: "clamp(16px, 5vw, 24px)",
     borderRadius: "16px",
     boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
     border: "1px solid rgba(0, 0, 0, 0.05)",
     width: "100%",
-    maxWidth: "600px",
     backdropFilter: "blur(10px)",
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
+    gap: "12px",
   },
   inputGroup: {
     display: "flex",
@@ -176,16 +174,16 @@ const styles = {
   row: {
     display: "flex",
     flexDirection: "row",
-    gap: "16px",
+    gap: "12px",
   },
   label: {
-    fontSize: "0.9rem",
+    fontSize: "0.875rem",
     fontWeight: "700",
     color: "#1f2937",
     marginLeft: "2px",
   },
   input: {
-    padding: "12px 14px",
+    padding: "10px 12px",
     borderRadius: "10px",
     border: "1.5px solid #E5E7EB",
     fontSize: "0.95rem",
@@ -196,7 +194,7 @@ const styles = {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.02)",
   },
   botao: {
-    padding: "14px 20px",
+    padding: "10px 16px",
     background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     color: "white",
     border: "none",
@@ -204,7 +202,7 @@ const styles = {
     fontWeight: "700",
     fontSize: "0.95rem",
     cursor: "pointer",
-    marginTop: "8px",
+    marginTop: "4px",
     transition: "all 0.3s ease",
     boxShadow: "0 8px 20px rgba(16, 185, 129, 0.3)",
     textTransform: "uppercase",
@@ -231,7 +229,7 @@ const responsiveAddStyles = `
   }
 
   [style*="padding: clamp"] {
-    padding: 20px !important;
+    padding: 16px !important;
   }
 
   [style*="gap: 20px"] {
@@ -243,6 +241,9 @@ const responsiveAddStyles = `
 @media (max-width: 480px) {
   [style*="fontSize: 0.95rem"] {
     font-size: 0.85rem !important;
+  }
+  [style*="flex-direction: row"] {
+    flex-direction: column !important;
   }
 }
 `;
