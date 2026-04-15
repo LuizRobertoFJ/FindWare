@@ -1,18 +1,139 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# FindWare
 
-Currently, two official plugins are available:
+**FindWare** é um sistema moderno de gestão de estoque, desenvolvido para facilitar o controle, visualização e otimização de inventário para pequenas e médias empresas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades
 
-## React Compiler
+- Cadastro e autenticação de usuários (JWT)
+- Adição, edição e remoção de produtos do estoque
+- Visualização de métricas e gráficos financeiros do inventário
+- Alertas automáticos de estoque crítico
+- Pesquisa e filtro de produtos em tempo real
+- Interface responsiva e moderna
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🖥️ Tecnologias Utilizadas
 
-Note: This will impact Vite dev & build performances.
+### Frontend
+- [React 19](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [React Router DOM](https://reactrouter.com/)
+- [ApexCharts](https://apexcharts.com/) (gráficos)
 
-## Expanding the ESLint configuration
+### Backend
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [JWT](https://jwt.io/) (autenticação)
+- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js) (hash de senha)
+- [dotenv](https://github.com/motdotla/dotenv) (variáveis de ambiente)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Estrutura do Projeto
+
+```
+FindWare/
+├── backend/
+│   ├── app.js
+│   ├── server.js
+│   ├── setup-db.js
+│   ├── package.json
+│   └── src/
+│       ├── config/db.js
+│       ├── controllers/
+│       ├── middlewares/
+│       └── routes/
+├── frontend/
+│   └── src/
+│       ├── App.jsx
+│       ├── main.jsx
+│       ├── api/
+│       ├── components/
+│       ├── context/
+│       ├── hooks/
+│       ├── pages/
+│       ├── routes/
+│       └── styles/
+├── index.html
+├── package.json
+├── vite.config.js
+├── vercel.json
+└── README.md
+```
+
+## ⚡ Instalação e Execução
+
+### Pré-requisitos
+- Node.js >= 18
+- PostgreSQL
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/findware.git
+cd findware
+```
+
+### 2. Backend
+
+```bash
+cd backend
+cp .env.example .env # Edite as variáveis conforme seu ambiente
+npm install
+node setup-db.js     # Cria o banco e tabelas
+npm start            # Inicia o servidor em http://localhost:3000
+```
+
+### 3. Frontend
+
+Abra outro terminal e execute:
+
+```bash
+cd frontend
+npm install
+npm run dev          # Inicia o frontend em http://localhost:5173
+```
+
+### 4. Acesse o sistema
+
+Abra [http://localhost:5173](http://localhost:5173) no navegador.
+
+## 🔑 Variáveis de Ambiente
+
+No backend, configure o arquivo `.env` com:
+
+```
+PORT=3000
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/findware
+JWT_SECRET=sua_chave_secreta
+```
+
+## 🛠️ Principais Comandos
+
+### Backend
+- `npm start` — Inicia o servidor Express
+- `node setup-db.js` — Cria o banco e tabelas
+
+### Frontend
+- `npm run dev` — Inicia o Vite em modo desenvolvimento
+- `npm run build` — Gera build de produção
+- `npm run lint` — Executa o ESLint
+
+## 🚀 Deploy
+
+O projeto está pronto para deploy em plataformas como [Vercel](https://vercel.com/) ou [Heroku](https://heroku.com/). Veja o arquivo `vercel.json` para configuração de rotas SPA.
+
+## 👤 Autenticação
+
+O sistema utiliza autenticação JWT. Usuários precisam se cadastrar e fazer login para acessar as rotas protegidas e gerenciar o estoque.
+
+## 📊 Métricas e Gráficos
+
+O painel exibe métricas de estoque, ticket médio, produtos críticos e gráficos de distribuição financeira em tempo real.
+
+## 📢 Alertas de Estoque Crítico
+
+Produtos com estoque abaixo de 5 unidades são destacados em alertas para rápida reposição.
+
+## 📄 Licença
+
+Este projeto é open-source e pode ser utilizado e modificado livremente.

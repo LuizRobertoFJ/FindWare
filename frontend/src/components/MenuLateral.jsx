@@ -102,6 +102,7 @@ const styles = {
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         letterSpacing: "-0.5px",
+        fontFamily: "Fugaz One, cursive",
     },
     logoSpan: {
         background: "linear-gradient(135deg, #34d399 0%, #10b981 100%)",

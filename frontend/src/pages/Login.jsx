@@ -120,6 +120,7 @@ const styles = {
     WebkitTextFillColor: "transparent",
     margin: "0 0 12px 0",
     letterSpacing: "-1px",
+    fontFamily: "Fugaz One, cursive",
   },
   subtitulo: {
     fontSize: "1rem",

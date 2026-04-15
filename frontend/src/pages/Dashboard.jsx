@@ -335,7 +335,7 @@ const styles = {
 
   titulo: {
     
-    fontWeight: "800",
+    fontWeight: "600",
     color: "#111827",
     margin: 0,
     textTransform: "uppercase",

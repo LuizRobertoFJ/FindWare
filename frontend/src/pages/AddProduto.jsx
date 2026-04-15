@@ -136,7 +136,7 @@ const styles = {
   },
   titulo: {
     fontSize: "clamp(16px, 5vw, 24px)",
-    fontWeight: "800",
+    fontWeight: "600",
     color: "#111827",
     margin: "0 0 8px 0",
     textTransform: "uppercase",
@@ -158,7 +158,7 @@ const styles = {
     borderRadius: "16px",
     boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
     border: "1px solid rgba(0, 0, 0, 0.05)",
-    width: "100%",
+    width: "90%",
     backdropFilter: "blur(10px)",
   },
   form: {

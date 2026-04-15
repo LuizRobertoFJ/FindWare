@@ -15,7 +15,7 @@ exports.adicionarProduto = async (req, res) => {
       "SELECT * FROM produtos WHERE nome = $1 AND usuario_id = $2",
       [nome, userId]
     );
-
+ 
     let resultado;
 
     if (produtoExistente.rows.length > 0) {
@@ -27,6 +27,7 @@ exports.adicionarProduto = async (req, res) => {
         "UPDATE produtos SET quantidade = $1 WHERE id = $2 RETURNING *",
         [novaQuantidade, produtoId]
       );
+      delete cache[userId]; // Limpar cache para este usuário
 
       res.status(200).json({
         mensagem: "Quantidade do produto atualizada com sucesso!",
@@ -38,6 +39,8 @@ exports.adicionarProduto = async (req, res) => {
         "INSERT INTO produtos (nome, descricao, preco, quantidade, usuario_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         [nome, descricao, preco, quantidade, userId]
       );
+
+      delete cache[userId]; // Limpar cache para este usuário
 
       res.status(201).json({
         mensagem: "Produto adicionado com sucesso!",
@@ -52,12 +55,25 @@ exports.adicionarProduto = async (req, res) => {
 };
 
 // Listar produtos do usuário
-
+  const cache = {}
+  const ttl = 60 * 1000; // 1 minuto
 exports.listarProdutos = async (req, res) => {
+
   const userId = req.user.id;
+  const now = Date.now();
+
+  // Limpar cache expirado
+  if(cache[userId] && now - cache[userId].timestamp < ttl) {
+     console.log("Dados retornados do cache para o usuário:", userId);
+    return res.json(cache[userId].data);
+    
+  }
   try {
     const produtos = await pool.query("SELECT * FROM produtos WHERE usuario_id = $1", [userId]);
-    res.json(produtos.rows);
+    cache[userId] = { data: produtos.rows, timestamp: now };
+     console.log("Dados retornados do banco para o usuário:", userId);
+   return res.json(cache[userId].data);
+  
 
   } catch (err) {
     console.error(err);
@@ -74,6 +90,7 @@ exports.deletarProduto = async (req, res) => {
       "DELETE FROM produtos WHERE id = $1 AND usuario_id = $2 RETURNING *",
       [produtoId, userId]
     );  
+      delete cache[userId]; // Limpar cache para este usuário
     if (resultado.rows.length === 0) {
       return res.status(404).json({ mensagem: "Produto não encontrado ou você não tem permissão para deletá-lo" });
     }
@@ -93,6 +110,7 @@ exports.atualizarProduto = async (req, res) => {
       "UPDATE produtos SET nome = $1, descricao = $2, preco = $3, quantidade = $4 WHERE id = $5 AND usuario_id = $6 RETURNING *",
       [nome, descricao, preco, quantidade, produtoId, userId]
     );  
+      delete cache[userId]; // Limpar cache para este usuário
     if (resultado.rows.length === 0) {
       return res.status(404).json({ mensagem: "Produto não encontrado ou você não tem permissão para atualizá-lo" });
     }

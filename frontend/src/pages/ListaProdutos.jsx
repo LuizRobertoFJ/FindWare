@@ -290,7 +290,7 @@ const styles = {
         fontSize: "clamp(18px, 5vw, 24px)",
         color: "#111827",
         margin: 0,
-        fontWeight: "800",
+        fontWeight: "600",
          textTransform: "uppercase",
     },
     subtitulo: {
@@ -475,7 +475,7 @@ const styles = {
         borderRadius: "12px",
         outline: "none",
         transition: "all 0.3s ease",
-        backgroundColor: "#F9FAFB",
+        backgroundColor: "#ffffff",
         fontFamily: "inherit",
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.02)",
     },
