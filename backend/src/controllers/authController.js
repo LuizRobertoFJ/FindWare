@@ -69,6 +69,7 @@ exports.login = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: ".onrender.com",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 dias
     });
    
