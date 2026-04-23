@@ -18,7 +18,11 @@ export function AuthProvider({ children }) {
       const resposta = await fetch(`${API_URL}/auth/me`, {
         credentials: "include",
       });
-
+      if(resposta.status === 401) {
+        setUsuario(null);
+        setCarregando(false);
+        return;
+      }
       if (!resposta.ok) {
         throw new Error("Usuário não autenticado");
       }
