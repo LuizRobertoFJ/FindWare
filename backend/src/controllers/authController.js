@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
-const authController = require("./authController");
 // Registro
 
 exports.register = async (req, res) => {
