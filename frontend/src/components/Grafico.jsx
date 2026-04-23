@@ -12,9 +12,9 @@ export default function Grafico() {
     async function fetchData() {
       try {
         const response = await fetch(`${API_URL}/produtos/relatorio`, {
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
           }
         });
         const data = await response.json();

@@ -14,10 +14,10 @@ export default function ListaProdutos() {
         async function fetchProdutos() {
             try {
                 const resposta = await fetch(`${API_URL}/produtos/`, {
+                    credentials: "include",
                     headers: {
                         method: "GET",
                         "Content-Type": "application/json",
-                        credentials: "include",
                     },
                 });
                 const dados = await resposta.json();
@@ -60,8 +60,9 @@ export default function ListaProdutos() {
     try {
         const resposta = await fetch(`${API_URL}/produtos/${id}`, {
             method: "DELETE",
+            credentials: "include",
             headers: {
-                credentials: "include",
+                "Content-Type": "application/json",
             },
         });
 
@@ -81,9 +82,10 @@ async function handleSalvarEdicao(produtoEditado) {
     try {
         const resposta = await fetch(`${API_URL}/produtos/${produtoEditado.id}`, {
             method: "PUT",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                credentials: "include",
+               
             },
             body: JSON.stringify({
                 nome: produtoEditado.nome,

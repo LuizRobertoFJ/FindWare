@@ -10,9 +10,9 @@ export default function AlertasEstoque() {
     async function fetchProdutos() {
       try {
         const resposta = await fetch(`${API_URL}/produtos/`, {
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
           },
         });
         const dados = await resposta.json();

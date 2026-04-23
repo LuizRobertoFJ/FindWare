@@ -76,9 +76,10 @@ export default function Dashboard() {
   const fetchProdutos = async () => {
     try {
       const resposta = await fetch(`${API_URL}/produtos/`, {
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-            credentials: "include",
+          
         },
       });
       const dados = await resposta.json();
@@ -110,9 +111,9 @@ export default function Dashboard() {
     try {
       const resposta = await fetch(`${API_URL}/produtos/`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
         },
         body: JSON.stringify(novoFormulario),
       });
@@ -136,9 +137,10 @@ export default function Dashboard() {
     try {
       await fetch(`${API_URL}/produtos/${id}`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
+          
         },
       });
       fetchProdutos();

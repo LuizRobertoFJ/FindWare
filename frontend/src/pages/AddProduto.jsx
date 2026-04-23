@@ -20,9 +20,9 @@ export default function AddProduto() {
     try {
       const resposta = await fetch(`${API_URL}/produtos/`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
         },
         body: JSON.stringify({
           nome,

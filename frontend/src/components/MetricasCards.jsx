@@ -12,9 +12,10 @@ export default function MetricasCards() {
     async function fetchData() {
       try {
         const responseProdutos = await fetch(`${API_URL}/produtos/`, {
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
+          
           }
         });
         const produtos = await responseProdutos.json();
@@ -23,9 +24,9 @@ export default function MetricasCards() {
         setProdutosCriticos(criticos);
 
         const response = await fetch(`${API_URL}/produtos/relatorio`, {
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
           }
         });
         const data = await response.json();
