@@ -13,8 +13,6 @@ export default function Login() {
     setCarregando(true);
     setErro("");
 
-    console.log("LOGIN - Enviando dados:", { email, senha });
-
     try {
       const resposta = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
@@ -22,8 +20,6 @@ export default function Login() {
         credentials: "include",
         body: JSON.stringify({ email, senha })
       });
-     CONSOLE.LOG("Api URL:", API_URL);
-     CONSOLE.LOG("ENVIANDO:", { email, senha });
      
      const dados = await resposta.json();
 
@@ -33,8 +29,7 @@ export default function Login() {
         return;
       }
      
-      CONSOLE.LOG("status:", resposta.status);
-      CONSOLE.LOG("ok?", resposta.ok);
+
       window.location.href = "/dashboard";
 
     } catch (erro) {
