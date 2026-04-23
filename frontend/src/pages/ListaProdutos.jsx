@@ -16,7 +16,7 @@ export default function ListaProdutos() {
                 const resposta = await fetch(`${API_URL}/produtos/`, {
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                        credentials: "include",
                     },
                 });
                 const dados = await resposta.json();
@@ -60,7 +60,7 @@ export default function ListaProdutos() {
         const resposta = await fetch(`${API_URL}/produtos/${id}`, {
             method: "DELETE",
             headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                credentials: "include",
             },
         });
 
@@ -82,7 +82,7 @@ async function handleSalvarEdicao(produtoEditado) {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                credentials: "include",
             },
             body: JSON.stringify({
                 nome: produtoEditado.nome,

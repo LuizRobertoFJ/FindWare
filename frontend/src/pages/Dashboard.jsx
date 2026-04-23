@@ -77,7 +77,8 @@ export default function Dashboard() {
     try {
       const resposta = await fetch(`${API_URL}/produtos/`, {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+            credentials: "include",
         },
       });
       const dados = await resposta.json();
@@ -111,7 +112,7 @@ export default function Dashboard() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          credentials: "include",
         },
         body: JSON.stringify(novoFormulario),
       });
@@ -136,7 +137,8 @@ export default function Dashboard() {
       await fetch(`${API_URL}/produtos/${id}`, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+          credentials: "include",
         },
       });
       fetchProdutos();
