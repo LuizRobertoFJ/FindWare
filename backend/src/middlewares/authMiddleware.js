@@ -2,11 +2,9 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 function authMiddleware(req, res, next) {
-  const tokenFromCookie = req.cookies.token;
-  const authHeader = req.headers["authorization"];
-  const tokenFromHeader = authHeader && authHeader.split(" ")[1];
-
-  const token = tokenFromCookie || tokenFromHeader;
+  const token = req.cookies.token;
+  
+  console.log("Token recebido no middleware:", req.cookies.token);
 
   if (!token) return res.status(401).json({ error: "Token não fornecido" });
 

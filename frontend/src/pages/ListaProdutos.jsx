@@ -15,6 +15,7 @@ export default function ListaProdutos() {
             try {
                 const resposta = await fetch(`${API_URL}/produtos/`, {
                     headers: {
+                        method: "GET",
                         "Content-Type": "application/json",
                         credentials: "include",
                     },
