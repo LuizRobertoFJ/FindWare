@@ -7,6 +7,8 @@ const produtoRoutes = require("./src/routes/produtoRoutes");
 
 const app = express();
 
+app.set("trust proxy", 1); // Habilita o trust proxy para reconhecer o protocolo HTTPS
+
 app.use(cors({
   origin: "https://find-ware.vercel.app",
   credentials: true,
