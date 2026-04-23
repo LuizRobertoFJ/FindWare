@@ -14,7 +14,7 @@ export default function Grafico() {
         const response = await fetch(`${API_URL}/produtos/relatorio`, {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            credentials: "include",
           }
         });
         const data = await response.json();

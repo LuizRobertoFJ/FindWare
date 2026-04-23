@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
-
+const authController = require("./authController");
 // Registro
 
 exports.register = async (req, res) => {
@@ -61,10 +61,20 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
       { id: usuario.rows[0].id },
       process.env.JWT_SECRET,
-      { expiresIn: "2h" }
+      { expiresIn: "7d" }
     );
 
-    res.json({ token });
+    const isProduction = process.env.NODE_ENV === "production";
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 dias
+    });
+   
+
+    res.json({ mensagem: "Login bem-sucedido" });
 
   } catch (err) {
     console.error(err);
@@ -91,5 +101,19 @@ exports.getMe = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ mensagem: "Erro ao buscar usuário" });
+  }
+};
+
+exports.logout = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
+    });
+    res.json({ mensagem: "Logout bem-sucedido" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: "Erro no logout" });
   }
 };

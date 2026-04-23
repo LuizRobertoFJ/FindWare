@@ -12,7 +12,7 @@ export default function AlertasEstoque() {
         const resposta = await fetch(`${API_URL}/produtos/`, {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            credentials: "include",
           },
         });
         const dados = await resposta.json();

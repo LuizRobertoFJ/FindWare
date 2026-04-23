@@ -1,7 +1,18 @@
 export default function Sair() {
-    // Remover o token do localStorage para "deslogar" o usuário
-    localStorage.removeItem("token");   
-    // Redirecionar para a página de login
-    window.location.href = "/";
-    return null; // Não renderiza nada
+
+    const navigate = useNavigate();
+
+    async function handleLogout() {
+        await fetch(`${API_URL}/auth/logout`, {
+            method: "POST",
+            credentials: "include",
+        });
+        navigate("/");
+    }
+
+    return (
+        <button onClick={handleLogout}>
+            Sair
+        </button>
+    );
 }

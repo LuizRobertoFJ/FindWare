@@ -13,29 +13,19 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     async function fetchUsuario() {
-      const token = localStorage.getItem("token");
+        try {
 
-      if (!token) {
-        setCarregando(false);
-        return;
+      const resposta = await fetch(`${API_URL}/auth/me`, {
+        credentials: "include",
+      });
+
+      if (!resposta.ok) {
+        throw new Error("Usuário não autenticado");
       }
-
-      try {
-
-        const resposta = await fetch(`${API_URL}/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!resposta.ok) {
-          throw new Error("Token inválido");
-        }
-
+    
         const dados = await resposta.json();
         setUsuario(dados);
       } catch (error) {
-        localStorage.removeItem("token");
         setUsuario(null);
       } finally {
         setCarregando(false);

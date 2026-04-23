@@ -17,6 +17,7 @@ export default function Login() {
       const resposta = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email, senha })
       });
 
@@ -28,7 +29,6 @@ export default function Login() {
         return;
       }
 
-      localStorage.setItem("token", dados.token);
       window.location.href = "/dashboard";
 
     } catch (erro) {
