@@ -106,7 +106,7 @@ const styles = {
   },
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.95)",
-    padding: "50px",
+    padding: "40px",
     borderRadius: "24px",
     boxShadow: "0 20px 60px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1)",
     backdropFilter: "blur(10px)",
